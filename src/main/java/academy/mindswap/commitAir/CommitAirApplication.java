@@ -1,0 +1,13 @@
+package academy.mindswap.commitAir;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CommitAirApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CommitAirApplication.class, args);
+	}
+
+}
