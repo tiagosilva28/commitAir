@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -21,5 +23,11 @@ public class Booking {
 
     @Column (nullable = false)
     private double finalPrice;
+
+    @ManyToOne(targetEntity = User.class)
+    private User user;
+
+    @OneToMany(mappedBy = "booking")
+    private List<FlightSeatPrice> flightSeatPrices;
 
 }

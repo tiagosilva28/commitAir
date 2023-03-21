@@ -24,4 +24,14 @@ public class Airport {
 
     @Column(nullable = false)
     private String iata;
+
+    @OneToOne(targetEntity = Flight.class)
+    private Flight flight;
+
+    @OneToOne(mappedBy = "airport")
+    private Country country;
+
+    @OneToOne(mappedBy = "airport")
+    private City city;
+
 }

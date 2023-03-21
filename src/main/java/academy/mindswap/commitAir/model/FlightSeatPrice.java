@@ -22,5 +22,10 @@ public class FlightSeatPrice {
     @Column (nullable = false)
     private double price;
 
+    @ManyToOne(targetEntity = Booking.class)
+    private Booking booking;
+
+    @OneToOne(targetEntity = Flight.class)
+    private Flight flight;
 
 }

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -26,5 +28,11 @@ public class Aircraft {
 
     @Column(nullable = false)
     private int capacity;
+
+    @OneToMany(mappedBy = "aircraft")
+    private List <Flight> flights;
+
+    @OneToMany(mappedBy = "aircraft")
+    private List <Seat> seats;
 
 }

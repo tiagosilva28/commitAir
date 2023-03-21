@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.apache.bcel.generic.TABLESWITCH;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -37,5 +38,12 @@ public class Flight {
     @Column(nullable = false)
     private LocalTime arrivalTime;
 
+    @OneToOne(mappedBy = "flight")
+    private FlightSeatPrice flightSeatPrice;
 
+    @ManyToOne(targetEntity = Aircraft.class)
+    private Aircraft aircraft;
+
+    @OneToOne(mappedBy = "flight")
+    private Airport airport;
 }

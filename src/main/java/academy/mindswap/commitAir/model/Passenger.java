@@ -33,5 +33,4 @@ public class Passenger {
     @Column(nullable = false)
     private String nationality;
 
-
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Builder
@@ -42,4 +43,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+    @OneToMany(mappedBy = "user")//ver cascade fetch
+    private List<Booking> bookings;
+
 }
