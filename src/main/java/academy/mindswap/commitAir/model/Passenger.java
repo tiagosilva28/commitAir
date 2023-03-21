@@ -40,4 +40,7 @@ public class Passenger {
     @ManyToMany(mappedBy = "passengers", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // for many to many
     private List<Booking> bookingList;
 
+    @OneToOne(mappedBy = "passenger")
+    private FlightSeatPrice flightSeatPrice;
+
 }
