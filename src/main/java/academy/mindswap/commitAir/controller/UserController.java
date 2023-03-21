@@ -1,5 +1,8 @@
 package academy.mindswap.commitAir.controller;
 
+import academy.mindswap.commitAir.airLabsClient.AirLabsClient;
+import academy.mindswap.commitAir.dto.AirLabsResponseCitiesDto;
+import academy.mindswap.commitAir.dto.CityDto;
 import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserDto;
 import academy.mindswap.commitAir.service.UserService;
@@ -9,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +38,13 @@ public class UserController {
         }
         UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<AirLabsResponseCitiesDto> city (){
+        AirLabsClient airLabsClient = new AirLabsClient();
+        var result = airLabsClient.getCities();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
