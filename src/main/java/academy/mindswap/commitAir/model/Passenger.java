@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Builder
@@ -32,5 +33,11 @@ public class Passenger {
 
     @Column(nullable = false)
     private String nationality;
+
+    /*@ManyToMany(mappedBy = "booking")
+    private List<Booking> bookingList;*/
+
+    @ManyToMany(mappedBy = "passengers", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // for many to many
+    private List<Booking> bookingList;
 
 }

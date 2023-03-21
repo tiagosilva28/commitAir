@@ -27,7 +27,11 @@ public class Booking {
     @ManyToOne(targetEntity = User.class)
     private User user;
 
-    @OneToMany(mappedBy = "booking")
+    //@OneToMany(mappedBy = "booking")
+    @OneToMany(targetEntity = FlightSeatPrice.class)
     private List<FlightSeatPrice> flightSeatPrices;
+
+    @ManyToMany(targetEntity = Passenger.class)
+    private List<Passenger> passengers;
 
 }

@@ -12,7 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name ="airports")
-
 public class Airport {
 
     @Id
@@ -25,13 +24,16 @@ public class Airport {
     @Column(nullable = false)
     private String iata;
 
-    @OneToOne(targetEntity = Flight.class)
-    private Flight flight;
-
     @OneToOne(mappedBy = "airport")
     private Country country;
 
     @OneToOne(mappedBy = "airport")
     private City city;
-//aaaaa
+
+    @OneToOne(mappedBy = "from")
+    private Flight flight_from;
+
+    @OneToOne(mappedBy = "to")
+    private Flight flight_to;
+
 }

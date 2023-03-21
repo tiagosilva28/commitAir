@@ -24,12 +24,6 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-  /*  @Column(nullable = false)
-    private Airport from;
-    @Column(nullable = false)
-    private Airport to;
-
-   */
     @Column(nullable = false)
     private Date departureDate;
     @Column(nullable = false)
@@ -46,6 +40,11 @@ public class Flight {
     @ManyToOne(targetEntity = Aircraft.class)
     private Aircraft aircraft;
 
-    @OneToOne(mappedBy = "flight")
-    private Airport airport;
+    //@OneToOne(mappedBy = "flight_from")
+    @OneToOne(targetEntity = Airport.class)
+    private Airport from;
+
+    //@OneToOne(mappedBy = "flight_to")
+    @OneToOne(targetEntity = Airport.class)
+    private Airport to;
 }
