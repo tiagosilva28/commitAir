@@ -33,5 +33,5 @@ public class Airport {
 
     @OneToOne(mappedBy = "airport")
     private City city;
-
+//aaaaa
 }
