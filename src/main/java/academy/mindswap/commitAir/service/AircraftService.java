@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AircraftService {
+public interface AircraftService {
     AircraftDto createAircraft(RegisterRequest aircraft);
 }
 
