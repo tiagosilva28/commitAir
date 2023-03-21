@@ -2,13 +2,12 @@ package academy.mindswap.commitAir.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Getter
+@Setter
 @Builder
-@Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
