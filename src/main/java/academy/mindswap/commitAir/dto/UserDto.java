@@ -1,10 +1,13 @@
 package academy.mindswap.commitAir.dto;
 
 
+import academy.mindswap.commitAir.model.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -23,6 +26,16 @@ public class UserDto {
     @Email(message = "Email must be valid")
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Invalid email")
     private String email;
+
+    @NotBlank (message = "Must have password")
+    private String password;
+
+    @NotBlank (message = "Must have a Birth Date")
+    private Date dateOfBirth;
+    @NotBlank (message = "Must have a Nationality")
+    private String nationality;
+
+    private Role role;
 
 
 }
