@@ -1,6 +1,6 @@
 package academy.mindswap.commitAir.controller;
 
-import academy.mindswap.commitAir.service.PassengerService;
+import academy.mindswap.commitAir.service.PassengerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/passenger")
 public class PassengerController {
 
-    private final PassengerService passengerService;
+    private final PassengerServiceImpl passengerService;
 
     @Autowired
-    public PassengerController(PassengerService passengerService) {
+    public PassengerController(PassengerServiceImpl passengerService) {
         this.passengerService = passengerService;
     }
 }

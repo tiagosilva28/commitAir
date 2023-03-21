@@ -1,6 +1,6 @@
 package academy.mindswap.commitAir.controller;
 
-import academy.mindswap.commitAir.service.FlightService;
+import academy.mindswap.commitAir.service.FlightServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/flight")
 public class FlightController {
 
-    private final FlightService flightService;
+    private final FlightServiceImpl flightService;
 
     @Autowired
-    public FlightController(FlightService flightService) {
+    public FlightController(FlightServiceImpl flightService) {
         this.flightService = flightService;
     }
 }
