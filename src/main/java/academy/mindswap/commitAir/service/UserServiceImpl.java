@@ -6,18 +6,24 @@ import academy.mindswap.commitAir.dto.UserDto;
 import academy.mindswap.commitAir.exception.PasswordNotMatch;
 import academy.mindswap.commitAir.model.User;
 import academy.mindswap.commitAir.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
-    @Autowired
-    UserConverter userConverter;
-    @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserConverter userConverter = new UserConverter();
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+
+    }
+
     @Override
     public UserDto createUser(RegisterRequest createUser) {
 

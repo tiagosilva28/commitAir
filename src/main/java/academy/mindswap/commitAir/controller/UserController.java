@@ -2,7 +2,7 @@ package academy.mindswap.commitAir.controller;
 
 import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserDto;
-import academy.mindswap.commitAir.service.UserServiceImpl;
+import academy.mindswap.commitAir.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +20,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
