@@ -4,5 +4,5 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-public interface CountryService {
+public interface LogoutService {
 }

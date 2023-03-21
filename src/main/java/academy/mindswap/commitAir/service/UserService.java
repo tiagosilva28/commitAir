@@ -1,9 +1,9 @@
 package academy.mindswap.commitAir.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import academy.mindswap.commitAir.dto.RegisterRequest;
+import academy.mindswap.commitAir.dto.UserDto;
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
+public interface UserService {
+
+    UserDto createUser(RegisterRequest user);
 }
