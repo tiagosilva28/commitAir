@@ -4,7 +4,7 @@ package academy.mindswap.commitAir.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-/*@Getter
+@Getter
 @Setter
 @Builder
 @ToString
@@ -13,7 +13,6 @@ import lombok.*;
 @Entity
 @Table(name ="airports")
 
- */
 public class Airport {
 
     @Id
