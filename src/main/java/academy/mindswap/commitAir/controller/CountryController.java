@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
-
-    private final UserService userService;
+@RequestMapping("/country")
+public class CountryController {
+    private final CountryService countryService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public CountryController(CountryService countryService) {
+        this.countryService = countryService;
     }
 }

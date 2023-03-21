@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/seat")
+public class SeatController {
 
-    private final UserService userService;
+    private final SeatService seatService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public SeatController(SeatService seatService) {
+        this.seatService = seatService;
     }
 }
