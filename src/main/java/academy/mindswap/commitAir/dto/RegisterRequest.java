@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -27,5 +29,10 @@ public class RegisterRequest {
     @Min(value = 8, message = "Password must be at least 8 characters long")
     @NotBlank (message = "Must have password")
     private String retypedPassword;
+
+    @NotBlank (message = "Must have a Birth Date")
+    private Date dateOfBirth;
+    @NotBlank (message = "Must have a Nationality")
+    private String nationality;
 
 }
