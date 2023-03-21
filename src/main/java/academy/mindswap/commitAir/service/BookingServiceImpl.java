@@ -1,9 +1,11 @@
 package academy.mindswap.commitAir.service;
 
 import academy.mindswap.commitAir.dto.RegisterRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
 
 public class BookingServiceImpl implements BookingService{
-    public BookingDto createBooking(RegisterRequest booking) {
-        return null;
-    }
 }
