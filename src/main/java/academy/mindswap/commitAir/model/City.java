@@ -24,8 +24,8 @@ public class City {
 
     @ManyToOne(targetEntity = Country.class)
     private Country country;
-
     @OneToOne(targetEntity = Airport.class)
     private Airport airport;
+
 
 }

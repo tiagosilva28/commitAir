@@ -24,10 +24,12 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+  /*  @Column(nullable = false)
     private Airport from;
     @Column(nullable = false)
     private Airport to;
+
+   */
     @Column(nullable = false)
     private Date departureDate;
     @Column(nullable = false)
