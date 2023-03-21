@@ -2,6 +2,8 @@ package academy.mindswap.commitAir.controller;
 
 import academy.mindswap.commitAir.dto.AuthenticationRequest;
 import academy.mindswap.commitAir.dto.AuthenticationResponse;
+import academy.mindswap.commitAir.dto.RegisterRequest;
+import academy.mindswap.commitAir.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    @PostMapping("/register")
+    /*@PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(service.register(request));
     }
@@ -24,6 +26,6 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request));
-    }
+    }*/
 
 }
