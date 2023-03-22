@@ -28,4 +28,7 @@ public class FlightSeatPrice {
     @OneToOne(targetEntity = Flight.class)
     private Flight flight;
 
+    @OneToOne(targetEntity = Passenger.class)
+    private Passenger passenger;
+
 }

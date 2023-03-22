@@ -28,7 +28,7 @@ public class Booking {
     private User user;
 
     //@OneToMany(mappedBy = "booking")
-    @OneToMany(targetEntity = FlightSeatPrice.class)
+    @OneToMany(mappedBy = "booking")
     private List<FlightSeatPrice> flightSeatPrices;
 
     @ManyToMany(targetEntity = Passenger.class)

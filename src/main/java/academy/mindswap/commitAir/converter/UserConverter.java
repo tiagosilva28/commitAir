@@ -4,7 +4,9 @@ import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserDto;
 import academy.mindswap.commitAir.model.Role;
 import academy.mindswap.commitAir.model.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserConverter {
     public User fromRegisterRequestToEntity(RegisterRequest createUser) {
 
