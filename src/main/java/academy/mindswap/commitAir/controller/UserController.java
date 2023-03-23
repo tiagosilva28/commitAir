@@ -3,6 +3,7 @@ package academy.mindswap.commitAir.controller;
 import academy.mindswap.commitAir.airLabsClient.AirLabsClient;
 import academy.mindswap.commitAir.dto.*;
 import academy.mindswap.commitAir.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,11 +38,15 @@ public class UserController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("")
+   /* @GetMapping("")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<UserDto> userDtos = this.userService.getAllUsers();
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
+
+    */
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
@@ -64,9 +69,9 @@ public class UserController {
 
 
     @GetMapping
-    public ResponseEntity<AirLabsResponseCitiesDto> city (){
+    public ResponseEntity<List<CityDto>> city () throws JsonProcessingException {
         AirLabsClient airLabsClient = new AirLabsClient();
-        AirLabsResponseCitiesDto result = airLabsClient.getCities();
+        List<CityDto> result = airLabsClient.getCities();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
