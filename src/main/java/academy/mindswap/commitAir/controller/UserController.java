@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<AirLabsResponseCitiesDto> city (){
         AirLabsClient airLabsClient = new AirLabsClient();
-        var result = airLabsClient.getCities();
+        AirLabsResponseCitiesDto result = airLabsClient.getCities();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
