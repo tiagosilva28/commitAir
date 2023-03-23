@@ -27,12 +27,10 @@ public class UserConverter {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
-                .password(user.getPassword())
+                //.password(user.getPassword())
                 .dateOfBirth(user.getDateOfBirth())
                 .nationality(user.getNationality())
                 .role(Role.USER)
                 .build();
-
-
     }
 }
