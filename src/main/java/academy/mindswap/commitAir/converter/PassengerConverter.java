@@ -20,12 +20,12 @@ public class PassengerConverter {
                 .nationality(passenger.getNationality())
                 .build();
     }
-    /*
+
     public Passenger fromPassengerDtoToEntity(PassengerDto passengerDto){
         return objectMapper.convertValue(passengerDto, Passenger.class);
     }
 
-     */
+
 
     public Passenger fromPassengerCreateDtoEntity(PassengerCreateDto passengerCreateDto){
         return Passenger.builder()
