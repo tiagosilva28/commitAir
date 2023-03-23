@@ -31,14 +31,15 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
-    private String password;
 
     @Column(nullable = false)
     private Date dateOfBirth;
 
     @Column(nullable = false)
     private String nationality;
+
+    @Column(nullable = false)
+    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
