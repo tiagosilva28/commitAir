@@ -11,9 +11,9 @@ public class AirLabsClient {
 public AirLabsResponseCitiesDto getCities(){
     String uri = "https://airlabs.co/api/v9/cities?api_key=51458100-5a17-4b86-a9f4-1388f74b5454&_filelds=name";
     RestTemplate restTemplate = new RestTemplate();
-    var result = restTemplate.getForObject(uri, AirLabsResponseCitiesDto.class);
+    AirLabsResponseCitiesDto result = restTemplate.getForObject(uri, AirLabsResponseCitiesDto.class);
 
-    System.out.println(result);
+    //System.out.println(result);
     return result;
 
 }
