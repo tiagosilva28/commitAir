@@ -7,10 +7,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.core.util.Json;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -18,27 +21,31 @@ import java.util.Collections;
 import java.util.List;
 
 
+@Service
 public class AirLabsClient {
+    RestTemplate restTemplate = new RestTemplate();
+
+
+    ObjectMapper objectMapper = new ObjectMapper();
     public List<CityDto> getCities() throws JsonProcessingException {
         String uri = "https://airlabs.co/api/v9/cities?api_key=51458100-5a17-4b86-a9f4-1388f74b5454&_filelds=name";
 
-        RestTemplate restTemplate = new RestTemplate();
-        ObjectMapper objectMapper = new ObjectMapper();
 
-        /*
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
-       List<CityDto> cities =  objectMapper.readValue(root.toString(), new TypeReference<List<CityDto>>() {});
+       List<CityDto> cities =  objectMapper.readValue(response.toString(), new TypeReference<List<CityDto>>() {});
 
-         */
-        ResponseEntity<AirLabsResponseCitiesDto> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, AirLabsResponseCitiesDto.class);
+
+     /*   ResponseEntity<AirLabsResponseCitiesDto> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, AirLabsResponseCitiesDto.class);
         if(responseEntity.getStatusCode().isError()){
             throw new Error();
         }
 
+      */
 
-        return responseEntity.getBody().getResponse();
+
+        return cities;
     }
 
     public AirLabsResponseCitiesDto getCities2(){
