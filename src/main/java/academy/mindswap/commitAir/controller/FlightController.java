@@ -26,16 +26,18 @@ public class FlightController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Flight> getFlightById(@PathVariable String flightCode, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    @GetMapping("/{flightCode}")
+    public ResponseEntity<String> getFlightById(@PathVariable String flightCode) {
+       /* if (bindingResult.hasErrors()) {
 
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
                 System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
             }
         }
-        Flight flight = flightService.getFlightById(flightCode);
+
+        */
+        String flight = flightService.getFlightById(flightCode);
         return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 }

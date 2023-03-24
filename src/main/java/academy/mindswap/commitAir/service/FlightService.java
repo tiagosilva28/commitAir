@@ -12,5 +12,5 @@ public interface FlightService {
 
     List<Flight> getAllFlights();
 
-    Flight getFlightById(String flightcode);
+    String getFlightById(String flightcode);
 }
