@@ -26,9 +26,9 @@ public class FlightController {
     }
 
 
-    @GetMapping("/{flightCode}")
+    /*@GetMapping("/{flightCode}")
     public ResponseEntity<String> getFlightById(@PathVariable String flightCode) {
-       /* if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
 
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
@@ -36,8 +36,8 @@ public class FlightController {
             }
         }
 
-        */
+
         String flight = flightService.getFlightById(flightCode);
         return new ResponseEntity<>(flight, HttpStatus.OK);
-    }
+    }*/
 }
