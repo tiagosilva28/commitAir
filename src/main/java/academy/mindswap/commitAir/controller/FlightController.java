@@ -49,5 +49,5 @@ public class FlightController {
         */
         FlightDto flight = flightService.getFlightById(flightIata);
         return new ResponseEntity<>(flight, HttpStatus.OK);
-    }*/
+    }
 }
