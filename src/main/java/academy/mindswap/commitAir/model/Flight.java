@@ -41,5 +41,5 @@ public class Flight {
     @Column
     private int duration;
     @Column
-    private int AvailableSeats = (int) (Math.random() * 10) + 1;
+    private int AvailableSeats = (int) (Math.random() * (10 + 1));
 }
