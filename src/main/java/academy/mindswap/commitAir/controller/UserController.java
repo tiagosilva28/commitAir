@@ -66,7 +66,7 @@ public class UserController {
         UserDto updatedUser = userService.updateUser(id, userCreateDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
-
+/*
 
     /*@GetMapping
     public ResponseEntity<List<CityDto>> city () throws JsonProcessingException {
