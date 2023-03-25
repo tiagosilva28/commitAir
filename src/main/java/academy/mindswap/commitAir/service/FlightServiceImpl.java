@@ -1,63 +1,74 @@
 package academy.mindswap.commitAir.service;
 
-
-import academy.mindswap.commitAir.dto.AirLabsResponseCitiesDto;
+import academy.mindswap.commitAir.dto.FlightDto;
+import academy.mindswap.commitAir.mapper.FlightMapper;
 import academy.mindswap.commitAir.model.Flight;
+import academy.mindswap.commitAir.repository.FlightRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class FlightServiceImpl implements FlightService{
 
-    @Override
-    public List<Flight> getAllFlights() {
-        return null;
+    RestTemplate restTemplate = new RestTemplate();
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    //@Autowired
+    FlightRepository flightRepository;
+
+    //@Autowired
+    FlightMapper flightMapper;
+    @Autowired
+    public FlightServiceImpl(FlightRepository flightRepository, FlightMapper flightMapper) {
+        this.flightRepository = flightRepository;
+        this.flightMapper = flightMapper;
     }
 
     @Override
-    public String getFlightById(String flightCode) {
+    public List<FlightDto> getAllFlightsFromAirport(String depIata) throws JsonProcessingException {
+        String uri = "https://airlabs.co/api/v9/schedules?dep_iata=" + depIata + "&api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
+        ResponseEntity<String> entity = restTemplate.exchange(uri,HttpMethod.GET,null, String.class);
+        JsonNode root = objectMapper.readTree(entity.getBody());
+        JsonNode response = root.path("response");
+        List<FlightDto> flights = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {});
+        return flights;
+    }
 
-        String uri = "https://airlabs.co/api/v9/flight?flight_iata=" + flightCode + "&api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
+    @Override
+    public FlightDto getFlightById(String flightIata) throws JsonProcessingException {
 
-        RestTemplate restTemplate = new RestTemplate();
-        ObjectMapper objectMapper = new ObjectMapper();
+        String uri = "https://airlabs.co/api/v9/flight?flight_iata=" + flightIata + "&api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
 
-        /*
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
-       List<CityDto> cities =  objectMapper.readValue(root.toString(), new TypeReference<List<CityDto>>() {});
+        FlightDto flightDto =  objectMapper.readValue(response.toString(), new TypeReference<FlightDto>() {});
 
-         */
-        ResponseEntity<Flight> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, Flight.class);
+        Flight flight = flightMapper.fromDtoToEntity(flightDto);
+
+        flightRepository.save(flight);
+
+
+
+       /* ResponseEntity<Flight> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, Flight.class);
         if(responseEntity.getStatusCode().isError()){
             throw new Error();
         }
 
-        String uri2 = "https://ryanair.p.rapidapi.com/flights?origin_code=LGW&destination_code=DUB&origin_departure_date=2023-09-28&destination_departure_date=2023-10-28";
-        RestTemplate restTemplate2 = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("X-RapidAPI-Key", "4de5cab2fcmshaccf16bbcacb5dap156556jsn775e2053adba");
-        headers.add("X-RapidAPI-Host", "ryanair.p.rapidapi.com");
-        HttpEntity<String> entity = new HttpEntity<>("body", headers);
-        ResponseEntity<String> responseEntity2 = restTemplate.exchange(uri2, HttpMethod.GET, entity, String.class);
+        */
 
 
-
-        return responseEntity2.getBody();
+        return flightDto;
     }
 }
