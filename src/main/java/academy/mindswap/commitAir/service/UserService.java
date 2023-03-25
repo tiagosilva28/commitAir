@@ -14,4 +14,6 @@ public interface UserService {
     UserDto getUserById(Long id);
 
     UserDto updateUser(Long id, UserCreateDto userCreateDto);
+
+    void updateRole(Long id);
 }

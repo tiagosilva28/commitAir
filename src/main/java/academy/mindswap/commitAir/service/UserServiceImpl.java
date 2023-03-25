@@ -5,14 +5,13 @@ import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserCreateDto;
 import academy.mindswap.commitAir.dto.UserDto;
 import academy.mindswap.commitAir.exception.PasswordNotMatch;
+import academy.mindswap.commitAir.model.Role;
 import academy.mindswap.commitAir.model.User;
 import academy.mindswap.commitAir.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,9 +67,20 @@ public class UserServiceImpl implements UserService{
         user.setPassword(userDto.getPassword());
         user.setDateOfBirth(userDto.getDateOfBirth());
         user.setNationality(userDto.getNationality());
-        user.setRole(userDto.getRole());
 
         userRepository.save(user);
         return userConverter.fromUserEntityToUserDto(user);
+    }
+
+    @Override
+    public void  updateRole(Long id) {
+       /* if (!userRepository.existsById(id)){
+            throw new UserDoesntExists("User Doesn't Exists");
+        }*/
+
+        User user = userRepository.getReferenceById(id);
+        user.setRole(Role.ADMIN);
+        userRepository.save(user);
+
     }
 }
