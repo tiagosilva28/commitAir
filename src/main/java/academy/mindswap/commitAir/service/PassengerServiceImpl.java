@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.service;
 
-
 import academy.mindswap.commitAir.converter.PassengerConverter;
 import academy.mindswap.commitAir.dto.PassengerCreateDto;
 import academy.mindswap.commitAir.dto.PassengerDto;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
