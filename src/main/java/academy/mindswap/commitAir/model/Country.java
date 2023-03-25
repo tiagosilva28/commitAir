@@ -27,6 +27,4 @@ public class Country {
 
     @OneToOne(targetEntity = Airport.class)
     private Airport airport;
-
-
 }

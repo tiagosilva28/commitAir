@@ -24,9 +24,8 @@ import java.util.List;
 @Service
 public class AirLabsClient {
     RestTemplate restTemplate = new RestTemplate();
-
-
     ObjectMapper objectMapper = new ObjectMapper();
+
     public List<CityDto> getCities() throws JsonProcessingException {
         String uri = "https://airlabs.co/api/v9/cities?api_key=51458100-5a17-4b86-a9f4-1388f74b5454&_filelds=name";
 

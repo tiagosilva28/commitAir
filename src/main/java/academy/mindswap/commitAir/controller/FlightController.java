@@ -34,18 +34,20 @@ public class FlightController {
     }
 
 
+
     @GetMapping("/{flightIata}")
     public ResponseEntity<FlightDto> getFlightById(@PathVariable String flightIata) throws JsonProcessingException {
        /* if (bindingResult.hasErrors()) {
+
 
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
                 System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
             }
         }
-//agjhHJGSAGHJASDHGJASDHGJ
+
         */
         FlightDto flight = flightService.getFlightById(flightIata);
         return new ResponseEntity<>(flight, HttpStatus.OK);
-    }
+    }*/
 }
