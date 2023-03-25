@@ -28,5 +28,4 @@ public class FlightDto {
     private String arr_time;
     private int duration;
 
-
 }

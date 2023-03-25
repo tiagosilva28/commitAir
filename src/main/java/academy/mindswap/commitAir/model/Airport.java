@@ -30,10 +30,10 @@ public class Airport {
     @OneToOne(mappedBy = "airport")
     private City city;
 
-    @OneToOne(mappedBy = "from")
+    /*@OneToOne(mappedBy = "from")
     private Flight flight_from;
 
     @OneToOne(mappedBy = "to")
-    private Flight flight_to;
+    private Flight flight_to;*/
 
 }

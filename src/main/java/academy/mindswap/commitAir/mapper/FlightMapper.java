@@ -9,6 +9,5 @@ import org.mapstruct.Mapper;
 public interface FlightMapper {
 
     Flight fromDtoToEntity(FlightDto flightDto);
-
-
+    FlightDto fromEntityToFlightDto(Flight flight);
 }

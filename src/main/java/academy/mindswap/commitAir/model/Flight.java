@@ -1,16 +1,10 @@
 package academy.mindswap.commitAir.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.aspectj.apache.bcel.generic.TABLESWITCH;
-
-import java.sql.Time;
-import java.time.LocalTime;
-import java.util.Date;
 
 @Builder
 @Data
@@ -24,27 +18,28 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Date departureDate;
-    @Column(nullable = false)
-    private LocalTime departureTime;
-
-    @Column(nullable = false)
-    private Date arrivalDate;
-    @Column(nullable = false)
-    private LocalTime arrivalTime;
-
-    @OneToOne(mappedBy = "flight")
-    private FlightSeatPrice flightSeatPrice;
-
-    @ManyToOne(targetEntity = Aircraft.class)
-    private Aircraft aircraft;
-
-    //@OneToOne(mappedBy = "flight_from")
-    @OneToOne(targetEntity = Airport.class)
-    private Airport from;
-
-    //@OneToOne(mappedBy = "flight_to")
-    @OneToOne(targetEntity = Airport.class)
-    private Airport to;
+    @Column
+    private String airline_iata;
+    @Column
+    private String airline_icao;
+    @Column
+    private String flight_iata;
+    @Column
+    private String flight_icao;
+    @Column
+    private String dep_iata;
+    @Column
+    private String dep_icao;
+    @Column
+    private String dep_time;
+    @Column
+    private String arr_iata;
+    @Column
+    private String arr_icao;
+    @Column
+    private String arr_time;
+    @Column
+    private int duration;
+    @Column
+    private int AvailableSeats = (int) (Math.random() * 10) + 1;
 }

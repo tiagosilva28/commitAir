@@ -1,7 +1,8 @@
 package academy.mindswap.commitAir.service;
 
-
 import academy.mindswap.commitAir.dto.FlightDto;
+import academy.mindswap.commitAir.mapper.FlightMapper;
+import academy.mindswap.commitAir.model.Flight;
 import academy.mindswap.commitAir.repository.FlightRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,11 +21,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FlightServiceImpl implements FlightService{
 
-
     RestTemplate restTemplate = new RestTemplate();
 
     ObjectMapper objectMapper = new ObjectMapper();
+    //@Autowired
+    FlightRepository flightRepository;
 
+    //@Autowired
+    FlightMapper flightMapper;
+    @Autowired
+    public FlightServiceImpl(FlightRepository flightRepository, FlightMapper flightMapper) {
+        this.flightRepository = flightRepository;
+        this.flightMapper = flightMapper;
+    }
 
     @Override
     public List<FlightDto> getAllFlightsFromAirport(String depIata) throws JsonProcessingException {
@@ -41,13 +50,14 @@ public class FlightServiceImpl implements FlightService{
 
         String uri = "https://airlabs.co/api/v9/flight?flight_iata=" + flightIata + "&api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
 
-
-
-
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
         FlightDto flightDto =  objectMapper.readValue(response.toString(), new TypeReference<FlightDto>() {});
+
+        Flight flight = flightMapper.fromDtoToEntity(flightDto);
+
+        flightRepository.save(flight);
 
 
 
@@ -57,8 +67,6 @@ public class FlightServiceImpl implements FlightService{
         }
 
         */
-
-
 
 
         return flightDto;

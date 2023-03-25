@@ -29,8 +29,8 @@ public class Aircraft {
     @Column(nullable = false)
     private int capacity;
 
-    @OneToMany(mappedBy = "aircraft")
-    private List <Flight> flights;
+    /*@OneToMany(mappedBy = "aircraft")
+    private List <Flight> flights;*/
 
     @OneToMany(mappedBy = "aircraft")
     private List <Seat> seats;
