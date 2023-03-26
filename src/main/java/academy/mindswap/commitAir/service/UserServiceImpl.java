@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
         user.setPassword(userDto.getPassword());
         user.setDateOfBirth(userDto.getDateOfBirth());
         user.setNationality(userDto.getNationality());
-        user.setRole(userDto.getRole());
+        //user.setRole(userDto.getRole());
 
         userRepository.save(user);
         return userConverter.fromUserEntityToUserDto(user);
