@@ -41,5 +41,5 @@ public class UserCreateDto {
     @Size(max = 12, message = "Password to long")
     private String retypePassword;
 
-    private Role role;
+    //private Role role;
 }

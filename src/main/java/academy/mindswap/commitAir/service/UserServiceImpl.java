@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService{
         user.setPassword(userDto.getPassword());
         user.setDateOfBirth(userDto.getDateOfBirth());
         user.setNationality(userDto.getNationality());
-
         userRepository.save(user);
         return userMapper.fromUserEntityToUserDto(user);
     }
