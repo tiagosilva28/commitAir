@@ -27,8 +27,6 @@ public class Airport {
     @OneToOne(mappedBy = "airport")
     private Country country;
 
-    @OneToOne(mappedBy = "airport")
-    private City city;
 
     /*@OneToOne(mappedBy = "from")
     private Flight flight_from;

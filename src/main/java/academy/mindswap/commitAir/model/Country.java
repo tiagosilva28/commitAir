@@ -22,8 +22,6 @@ public class Country {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "country")
-    private List<City> cities;
 
     @OneToOne(targetEntity = Airport.class)
     private Airport airport;
