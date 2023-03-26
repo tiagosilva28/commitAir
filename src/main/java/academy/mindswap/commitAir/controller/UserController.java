@@ -66,6 +66,13 @@ public class UserController {
         UserDto updatedUser = userService.updateUser(id, userCreateDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
+    //não esquecer que só o admin pode fazer update do Role com security
+    @PutMapping("/update-role/{id}")
+    //@Secured("USER")
+    public ResponseEntity<UserDto> updateRole(@PathVariable Long id){
+        userService.updateRole(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 /*
 
     /*@GetMapping
@@ -74,5 +81,7 @@ public class UserController {
         List<CityDto> result = airLabsClient.getCities();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }*/
+
+
 
 }

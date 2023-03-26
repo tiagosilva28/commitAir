@@ -16,8 +16,6 @@ public class GenericExceptionHandler {
 
     Logger logger =  LoggerFactory.getLogger(GenericExceptionHandler.class);
 
-
-
     @ExceptionHandler({PasswordNotMatch.class})
     public ResponseEntity<String> handleNotFoundException(Exception ex) {
         logger.error("Resource not found: " + ex);

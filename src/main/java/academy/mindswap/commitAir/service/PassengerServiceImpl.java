@@ -1,8 +1,8 @@
 package academy.mindswap.commitAir.service;
 
-import academy.mindswap.commitAir.converter.PassengerConverter;
 import academy.mindswap.commitAir.dto.PassengerCreateDto;
 import academy.mindswap.commitAir.dto.PassengerDto;
+import academy.mindswap.commitAir.mapper.PassengerMapper;
 import academy.mindswap.commitAir.model.Passenger;
 import academy.mindswap.commitAir.repository.PassengerRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,33 +15,34 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PassengerServiceImpl implements PassengerService{
-    private PassengerRepository passengerRepository;
-    private PassengerConverter passengerConverter;
+    PassengerRepository passengerRepository;
+    PassengerMapper passengerMapper;
+
 
     @Autowired
-    public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerConverter passengerConverter){
+    public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerMapper passengerMapper){
         this.passengerRepository = passengerRepository;
-        this.passengerConverter = passengerConverter;
+        this.passengerMapper = passengerMapper;
     }
 
     @Override
-    public PassengerDto createPassenger(PassengerCreateDto passengerCreateDto) {
-        Passenger passenger = passengerConverter.fromPassengerCreateDtoEntity(passengerCreateDto);
+    public PassengerDto createPassenger(PassengerDto passengerDto) {
+        Passenger passenger = passengerMapper.fromPassengerDtoToPassengerEntity(passengerDto);
         passenger = passengerRepository.save(passenger);
-        return passengerConverter.fromPassengerEntityToPassengerDto(passenger);
+        return passengerMapper.fromPassengerEntityToPassengerDto(passenger);
     }
 
     @Override
     public PassengerDto getPassengerById(Long passengerId) {
         Passenger passenger =passengerRepository.getReferenceById(passengerId);
-        return passengerConverter.fromPassengerEntityToPassengerDto(passenger);
+        return passengerMapper.fromPassengerEntityToPassengerDto(passenger);
     }
 
     @Override
     public List<PassengerDto> getAllPassengers() {
         List<Passenger> passengers = passengerRepository.findAll();
         List<PassengerDto> passengerDtos = passengers.parallelStream()
-                .map((passengerConverter::fromPassengerEntityToPassengerDto))
+                .map((passengerMapper::fromPassengerEntityToPassengerDto))
                 .toList();
         return passengerDtos;
     }
@@ -57,7 +58,7 @@ public class PassengerServiceImpl implements PassengerService{
         existingPassenger.setDateOfBirth(passengerDto.getDateOfBirth());
         existingPassenger.setNationality(passengerDto.getNationality());
         Passenger updatePassenger = passengerRepository.save(existingPassenger);
-        return passengerConverter.fromPassengerEntityToPassengerDto(updatePassenger);
+        return passengerMapper.fromPassengerEntityToPassengerDto(updatePassenger);
     }
 
     @Override
