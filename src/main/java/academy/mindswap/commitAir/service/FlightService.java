@@ -11,4 +11,6 @@ public interface FlightService {
     List<FlightDto> getAllFlightsFromAirport(String depIata) throws JsonProcessingException;
 
     FlightDto getFlightById(String flightIata) throws JsonProcessingException;
+
+    FlightDto getFlightByDate(String flightDate);
 }

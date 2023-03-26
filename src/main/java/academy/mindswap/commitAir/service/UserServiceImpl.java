@@ -4,6 +4,7 @@ package academy.mindswap.commitAir.service;
 import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserCreateDto;
 import academy.mindswap.commitAir.dto.UserDto;
+import academy.mindswap.commitAir.exception.IdNotExist;
 import academy.mindswap.commitAir.exception.PasswordNotMatch;
 import academy.mindswap.commitAir.mapper.UserMapper;
 import academy.mindswap.commitAir.model.Role;

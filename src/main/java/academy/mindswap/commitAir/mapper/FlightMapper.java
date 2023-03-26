@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface FlightMapper {
 
+    //Flight fromDtoToEntity(FlightDto flightDto);
     Flight fromDtoToEntity(FlightDto flightDto);
     FlightDto fromEntityToFlightDto(Flight flight);
 }
