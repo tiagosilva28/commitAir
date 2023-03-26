@@ -22,10 +22,17 @@ public class City {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(targetEntity = Country.class)
-    private Country country;
-    @OneToOne(targetEntity = Airport.class)
-    private Airport airport;
+    @Column(nullable = false)
+    private String city_code;
+    @Column(nullable = false)
+    private double lat;
+
+    @Column(nullable = false)
+    private double lng;
+
+    @Column(nullable = false)
+    private String country_code;
+
 
 
 }
