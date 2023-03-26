@@ -23,7 +23,7 @@ public class PassengerController {
     }
 
     @PostMapping
-    public ResponseEntity<PassengerDto> createPassenger(@RequestBody PassengerCreateDto passenger){
+    public ResponseEntity<PassengerDto> createPassenger(@RequestBody PassengerDto passenger){
         PassengerDto savedPassenger = passengerService.createPassenger(passenger);
         return new ResponseEntity<>(savedPassenger, HttpStatus.CREATED);
     }
@@ -35,7 +35,7 @@ public class PassengerController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<PassengerDto>> myFirstEndPoint(){
+    public ResponseEntity<List<PassengerDto>> getAllPassengers(){
         List<PassengerDto> passengers = passengerService.getAllPassengers();
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }
