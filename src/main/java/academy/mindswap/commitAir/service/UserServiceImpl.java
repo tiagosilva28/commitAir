@@ -4,6 +4,7 @@ import academy.mindswap.commitAir.converter.UserConverter;
 import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserCreateDto;
 import academy.mindswap.commitAir.dto.UserDto;
+import academy.mindswap.commitAir.exception.IdNotExist;
 import academy.mindswap.commitAir.exception.PasswordNotMatch;
 import academy.mindswap.commitAir.model.User;
 import academy.mindswap.commitAir.repository.UserRepository;
@@ -52,9 +53,7 @@ public class UserServiceImpl implements UserService{
     public UserDto getUserById(Long id) {
         Optional<User> user = userRepository.getUserById(id);
         if (user.isEmpty()) {
-            //throw new IdNotExist("User not found");
-            //TODO
-            //create exceptions
+            throw new IdNotExist("User not found");
         }
         return userConverter.fromUserEntityToUserDto(user.get());
     }
