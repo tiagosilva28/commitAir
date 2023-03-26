@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface PassengerService {
-    PassengerDto createPassenger(PassengerCreateDto passengerCreateDto);
+    PassengerDto createPassenger(PassengerDto passengerDto);
     PassengerDto getPassengerById(Long passengerId);
     List<PassengerDto> getAllPassengers();
     PassengerDto updatePassenger(Long passengerId, PassengerDto passengerDto);

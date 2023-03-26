@@ -1,4 +1,4 @@
-package academy.mindswap.commitAir.converter;
+/*package academy.mindswap.commitAir.converter;
 
 import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserDto;
@@ -34,3 +34,4 @@ public class UserConverter {
                 .build();
     }
 }
+*/

@@ -22,9 +22,7 @@ public class Seat {
     @Column(nullable = false)
     private Boolean isOccupy;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private double price;
 
-    @ManyToOne(targetEntity = Aircraft.class)
-    private Aircraft aircraft;
 }

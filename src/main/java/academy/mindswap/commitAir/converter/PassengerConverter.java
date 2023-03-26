@@ -1,4 +1,4 @@
-package academy.mindswap.commitAir.converter;
+/*package academy.mindswap.commitAir.converter;
 
 import academy.mindswap.commitAir.dto.PassengerCreateDto;
 import academy.mindswap.commitAir.dto.PassengerDto;
@@ -36,4 +36,4 @@ public class PassengerConverter {
                 .build();
     }
 
-}
+}*/
