@@ -14,14 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="bookings")
+@Table(name = "bookings")
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private double finalPrice;
 
     @ManyToOne(targetEntity = User.class)
@@ -31,4 +31,12 @@ public class Booking {
     @ManyToMany(targetEntity = Passenger.class)
     private List<Passenger> passengers;
 
+    @ManyToOne
+    private Flight flight;
+
+    public Booking(User user, List<Passenger> passengers, Flight flight) {
+        this.user = user;
+        this.passengers = passengers;
+        this.flight = flight;
+    }
 }

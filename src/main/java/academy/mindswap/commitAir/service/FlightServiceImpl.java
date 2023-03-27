@@ -2,7 +2,6 @@ package academy.mindswap.commitAir.service;
 
 import academy.mindswap.commitAir.dto.FlightDto;
 import academy.mindswap.commitAir.exception.IdNotExist;
-import academy.mindswap.commitAir.exception.InvalidFlightDate;
 import academy.mindswap.commitAir.mapper.FlightMapper;
 import academy.mindswap.commitAir.model.Flight;
 import academy.mindswap.commitAir.repository.FlightRepository;
@@ -13,17 +12,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FlightServiceImpl implements FlightService{
+public class FlightServiceImpl implements FlightService {
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -31,6 +28,7 @@ public class FlightServiceImpl implements FlightService{
     FlightRepository flightRepository;
 
     FlightMapper flightMapper;
+
     @Autowired
     public FlightServiceImpl(FlightRepository flightRepository, FlightMapper flightMapper) {
         this.flightRepository = flightRepository;
@@ -40,10 +38,11 @@ public class FlightServiceImpl implements FlightService{
     @Override
     public List<FlightDto> getAllFlightsFromAirport(String depIata) throws JsonProcessingException {
         String uri = "https://airlabs.co/api/v9/schedules?dep_iata=" + depIata + "&api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
-        ResponseEntity<String> entity = restTemplate.exchange(uri,HttpMethod.GET,null, String.class);
+        ResponseEntity<String> entity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(entity.getBody());
         JsonNode response = root.path("response");
-        List<FlightDto> flights = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {});
+        List<FlightDto> flights = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {
+        });
         return flights;
     }
 
@@ -56,7 +55,7 @@ public class FlightServiceImpl implements FlightService{
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
 
-        if(root.path("error").path("message").equals("Flight not found")){
+        if (root.path("error").path("message").equals("Flight not found")) {
             throw new IdNotExist("Flight not found");
         }
 
@@ -64,7 +63,8 @@ public class FlightServiceImpl implements FlightService{
             throw new IdNotExist("Flight not found");
         }*/
 
-        FlightDto flightDto = objectMapper.readValue(response.toString(), new TypeReference<FlightDto>() {});
+        FlightDto flightDto = objectMapper.readValue(response.toString(), new TypeReference<FlightDto>() {
+        });
 
         Flight flight = flightMapper.fromDtoToEntity(flightDto);
 
@@ -96,14 +96,17 @@ public class FlightServiceImpl implements FlightService{
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
 
 
-        if (!root.findValue("error").isMissingNode()) {
+       /* if (!root.findValue("error").isMissingNode()) {
             System.out.println("PQP");
             throw new RuntimeException("Failed to retrieve flights from API. Status code: " + responseEntity.getStatusCodeValue());
         }
 
+        */
+
         JsonNode response = root.path("response");
 
-        List<FlightDto> flightsDto = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {});
+        List<FlightDto> flightsDto = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {
+        });
 
         List<Flight> flights = flightMapper.fromDtoListToEntity(flightsDto);
 

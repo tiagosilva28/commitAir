@@ -1,8 +1,9 @@
 package academy.mindswap.commitAir.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import academy.mindswap.commitAir.dto.BookingDto;
+import academy.mindswap.commitAir.dto.RequestBookingDto;
 
 
 public interface BookingService {
+    BookingDto createBooking(RequestBookingDto requestBookingDto);
 }
