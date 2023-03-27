@@ -94,32 +94,21 @@ public class FlightServiceImpl implements FlightService{
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
 
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
-        if (!root.path("error").isMissingNode()) {
+
+
+        if (!root.findValue("error").isMissingNode()) {
+            System.out.println("PQP");
             throw new RuntimeException("Failed to retrieve flights from API. Status code: " + responseEntity.getStatusCodeValue());
         }
 
-
         JsonNode response = root.path("response");
-
-
-
-        /*JsonObject geJsonObject(String name)
-
-
-        if(root.){
-
-            new throw InvalidFlightDate("");
-        }*/
 
         List<FlightDto> flightsDto = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {});
 
-
         List<Flight> flights = flightMapper.fromDtoListToEntity(flightsDto);
-
 
         flightRepository.saveAll(flights);
 
         return flightsDto;
     }
-
 }
