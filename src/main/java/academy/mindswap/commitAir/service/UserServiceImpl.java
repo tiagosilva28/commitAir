@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.service;
 
-
 import academy.mindswap.commitAir.dto.RegisterRequest;
 import academy.mindswap.commitAir.dto.UserCreateDto;
 import academy.mindswap.commitAir.dto.UserDto;
@@ -75,7 +74,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void  updateRole(Long id) {
        if (!userRepository.existsById(id)){
-            throw new UserDoesntExists("User Doesn't Exists");
+            throw new IdNotExist("User Doesn't Exists");
         }
 
         User user = userRepository.getReferenceById(id);
