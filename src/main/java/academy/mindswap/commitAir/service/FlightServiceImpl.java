@@ -2,6 +2,7 @@ package academy.mindswap.commitAir.service;
 
 import academy.mindswap.commitAir.dto.FlightDto;
 import academy.mindswap.commitAir.exception.IdNotExist;
+import academy.mindswap.commitAir.exception.InvalidFlightDate;
 import academy.mindswap.commitAir.mapper.FlightMapper;
 import academy.mindswap.commitAir.model.Flight;
 import academy.mindswap.commitAir.repository.FlightRepository;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -83,5 +85,30 @@ public class FlightServiceImpl implements FlightService{
 
 
         return null;
+    }
+
+    @Override
+    public List<FlightDto> getAllFlightInformation(String depIata, String arrIata, String depTime) throws JsonProcessingException {
+        String uri = "https://airlabs.co/api/v9/schedules?api_key=51458100-5a17-4b86-a9f4-1388f74b5454&dep_iata=" + depIata + "&arr_iata=" + arrIata + "&dep_time=" + depTime + "&status=scheduled";
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
+
+        JsonNode root = objectMapper.readTree(responseEntity.getBody());
+
+
+        if (!root.findValue("error").isMissingNode()) {
+            System.out.println("PQP");
+            throw new RuntimeException("Failed to retrieve flights from API. Status code: " + responseEntity.getStatusCodeValue());
+        }
+
+        JsonNode response = root.path("response");
+
+        List<FlightDto> flightsDto = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {});
+
+        List<Flight> flights = flightMapper.fromDtoListToEntity(flightsDto);
+
+        flightRepository.saveAll(flights);
+
+        return flightsDto;
     }
 }

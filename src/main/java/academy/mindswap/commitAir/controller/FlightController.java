@@ -50,4 +50,10 @@ public class FlightController {
         FlightDto flight = flightService.getFlightById(flightIata);
         return new ResponseEntity<>(flight, HttpStatus.OK);
     }
+
+    @GetMapping("/{depIata}/{arrIata}/{depTime}")
+    public ResponseEntity<List<FlightDto>> getAllFlightInformation(@PathVariable String depIata, String arrIata, String depTime) throws JsonProcessingException {
+        List<FlightDto> flights = flightService.getAllFlightInformation(depIata, arrIata, depTime);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
 }
