@@ -15,6 +15,7 @@ public class BookingDto {
     private UserDto user;
     private List<PassengerDto> passengers;
     private FlightDto flight;
+    private double finalPrice;
 
 
 }

@@ -55,15 +55,17 @@ public class BookingServiceImpl implements BookingService {
         Flight flight = flightRepository.findById(requestBookingDto.getFlightId())
                 .orElseThrow(() -> new FlightDoesntExists("Flight Doesn't exists"));
 
-
-        Booking booking = new Booking(user, passengers, flight);
-
-        // Save the booking to the database
-        bookingRepository.save(booking);
-
         if (flight.getAvailableSeats() < passengers.stream().count()) {
             throw new InsufficientSeats("Insufficient Seats Available");
         }
+
+        flight.setAvailableSeats(flight.getAvailableSeats() - (int) passengers.stream().count());
+
+        Booking booking = new Booking(user, passengers, flight);
+        booking.setFinalPrice((int) passengers.stream().count() * flight.getTicketPrice());
+
+        // Save the booking to the database
+        bookingRepository.save(booking);
 
 
         return bookingMapper.fromEntityToDto(booking);

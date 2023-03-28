@@ -34,7 +34,10 @@ public class Flight {
     @Column
     private String status;
     @Column
-    private int AvailableSeats;
+    private int availableSeats;
+
+    @Column
+    private int ticketPrice;
 
     @OneToMany(mappedBy = "flight")
     private List<Booking> bookings;
