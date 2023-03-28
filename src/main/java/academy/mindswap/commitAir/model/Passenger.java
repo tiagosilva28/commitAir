@@ -29,7 +29,7 @@ public class Passenger {
     private String lastName;
 
     @Column(nullable = false)
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     @Column(nullable = false)
     private String nationality;

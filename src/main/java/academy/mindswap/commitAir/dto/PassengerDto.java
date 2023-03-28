@@ -19,7 +19,7 @@ public class PassengerDto {
     private String lastName;
 
     @NotBlank (message = "Must have a Birth Date")
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     @NotBlank (message = "Must have a Nationality")
     private String nationality;
