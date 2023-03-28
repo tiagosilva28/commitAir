@@ -1,13 +1,14 @@
 package academy.mindswap.commitAir.controller;
 
-import academy.mindswap.commitAir.airLabsClient.AirLabsClient;
-import academy.mindswap.commitAir.dto.*;
+import academy.mindswap.commitAir.dto.RegisterRequest;
+import academy.mindswap.commitAir.dto.UserCreateDto;
+import academy.mindswap.commitAir.dto.UserDto;
 import academy.mindswap.commitAir.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class UserController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody RegisterRequest user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
 
@@ -47,9 +49,8 @@ public class UserController {
     */
 
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         UserDto userDto = this.userService.getUserById(id);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
@@ -66,10 +67,11 @@ public class UserController {
         UserDto updatedUser = userService.updateUser(id, userCreateDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
+
     //não esquecer que só o admin pode fazer update do Role com security
     @PutMapping("/update-role/{id}")
     //@Secured("USER")
-    public ResponseEntity<UserDto> updateRole(@PathVariable Long id){
+    public ResponseEntity<UserDto> updateRole(@PathVariable Long id) {
         userService.updateRole(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
@@ -81,7 +83,6 @@ public class UserController {
         List<CityDto> result = airLabsClient.getCities();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }*/
-
 
 
 }
