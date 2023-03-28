@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Random;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.Random;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FlightDto {
+public class FlightDto implements Serializable {
     /*private String airline_iata;
     private String airline_icao;*/
     private String flight_iata;
