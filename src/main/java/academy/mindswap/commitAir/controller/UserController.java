@@ -6,6 +6,7 @@ import academy.mindswap.commitAir.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -46,10 +47,10 @@ public class UserController {
 
     */
 
-
-
     @GetMapping("/{id}")
+    @Cacheable(value = "userDto", key = "#id")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
+        System.out.println("Going to mySQL DB.");
         UserDto userDto = this.userService.getUserById(id);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
