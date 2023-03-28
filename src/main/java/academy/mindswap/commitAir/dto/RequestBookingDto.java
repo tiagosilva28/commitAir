@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class RequestBookingDto {
 
-    private Long userId;
     private List<Long> passengerIds;
     private Long flightId;
 }

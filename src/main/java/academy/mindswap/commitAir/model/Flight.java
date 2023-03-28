@@ -32,7 +32,9 @@ public class Flight {
     @Column
     private int duration;
     @Column
-    private int AvailableSeats = (int) (Math.random() * (10 + 1));
+    private String status;
+    @Column
+    private int AvailableSeats;
 
     @OneToMany(mappedBy = "flight")
     private List<Booking> bookings;
