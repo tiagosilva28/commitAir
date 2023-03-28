@@ -38,6 +38,9 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     FlightRepository flightRepository;
 
+    @Autowired
+    MailService mailService;
+
     @Override
     public BookingDto createBooking(RequestBookingDto requestBookingDto) {
 
@@ -66,6 +69,8 @@ public class BookingServiceImpl implements BookingService {
 
         // Save the booking to the database
         bookingRepository.save(booking);
+
+        mailService.sendEmail(user, flight, passengers.get(0));
 
 
         return bookingMapper.fromEntityToDto(booking);
