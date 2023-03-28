@@ -2,8 +2,9 @@ package academy.mindswap.commitAir.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 
-public class UserDoesntExists extends EntityNotFoundException {
-    public UserDoesntExists(String message) {
+public class FlightDoesntExists extends EntityNotFoundException {
+
+    public FlightDoesntExists(String message) {
         super(message);
     }
 }

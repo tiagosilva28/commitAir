@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="flights")
+@Table(name = "flights")
 public class Flight {
 
     @Id
@@ -29,8 +31,14 @@ public class Flight {
     private String arr_time;
     @Column
     private int duration;
-
+    @Column
+    private String status;
+    @Column
+    private int availableSeats;
 
     @Column
-    private int AvailableSeats = (int) (Math.random() * (10 + 1));
+    private int ticketPrice;
+
+    @OneToMany(mappedBy = "flight")
+    private List<Booking> bookings;
 }
