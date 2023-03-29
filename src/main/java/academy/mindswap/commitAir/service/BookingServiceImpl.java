@@ -75,4 +75,11 @@ public class BookingServiceImpl implements BookingService {
 
         return bookingMapper.fromEntityToDto(booking);
     }
+
+    @Override
+    public BookingDto getBookingById(Long userId) {
+        return null;
+    }
+
+
 }
