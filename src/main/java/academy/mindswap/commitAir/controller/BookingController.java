@@ -6,10 +6,7 @@ import academy.mindswap.commitAir.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/booking")
@@ -27,6 +24,14 @@ public class BookingController {
 
         BookingDto savedBooking = bookingService.createBooking(booking);
         return new ResponseEntity<>(savedBooking, HttpStatus.CREATED);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<BookingDto> gerBookingById(@RequestBody Long id) {
+
+        BookingDto bookingDto = bookingService.getBookingById(id);
+
+        return new ResponseEntity<>(bookingDto, HttpStatus.OK);
     }
 
 
