@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(Long id, UserCreateDto userDto) {
 
         if (!userRepository.existsById(id)) {
-            throw new UserDoesntExists("User Doesn't Exists");
+            throw new UserDoesntExists("User doesn't exists!");
         }
         User user = userRepository.getReferenceById(id);
         User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

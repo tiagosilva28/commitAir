@@ -4,10 +4,7 @@ import academy.mindswap.commitAir.dto.BookingDto;
 import academy.mindswap.commitAir.dto.RequestBookingDto;
 import academy.mindswap.commitAir.exception.*;
 import academy.mindswap.commitAir.mapper.BookingMapper;
-import academy.mindswap.commitAir.model.Booking;
-import academy.mindswap.commitAir.model.Flight;
-import academy.mindswap.commitAir.model.Passenger;
-import academy.mindswap.commitAir.model.User;
+import academy.mindswap.commitAir.model.*;
 import academy.mindswap.commitAir.repository.BookingRepository;
 import academy.mindswap.commitAir.repository.FlightRepository;
 import academy.mindswap.commitAir.repository.PassengerRepository;
@@ -77,15 +74,19 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BookingDto getBookingById(Long id) {
         if (!bookingRepository.existsById(id)) {
-            throw new BookingNotExists("Bookind Doesn't Exists");
+            throw new BookingNotExists("Booking doesn't exists!");
         }
 
         User user = bookingRepository.findById(id).get().getUser();
         User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 
-        if (!logInUser.getId().equals(user.getId())) {
+        /*if (!logInUser.getId().equals(user.getId())) {
             throw new UserNotMatch("Don't have permissions to access here");
+        }*/
+
+        if (!logInUser.getRole().equals(Role.ADMIN) && !logInUser.getId().equals(user.getId())) {
+            throw new UserNotMatch("Don't have permissions to access here.");
         }
 
         BookingDto booking = bookingMapper.fromEntityToDto(bookingRepository.getReferenceById(id));
