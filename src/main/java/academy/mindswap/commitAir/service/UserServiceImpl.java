@@ -11,7 +11,6 @@ import academy.mindswap.commitAir.mapper.UserMapper;
 import academy.mindswap.commitAir.model.Role;
 import academy.mindswap.commitAir.model.User;
 import academy.mindswap.commitAir.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
     UserMapper userMapper;
@@ -55,7 +54,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDto getUserById(Long id) {
 
-        if (!userRepository.existsById(id)){
+        if (!userRepository.existsById(id)) {
             throw new UserDoesntExists("User Doesn't Exists");
         }
         Optional<User> user = userRepository.getUserById(id);
@@ -67,7 +66,7 @@ public class UserServiceImpl implements UserService{
             throw new UserNotMatch("You are trying to access other User");
         }*/
 
-        if (logInUser.getRole().equals("USER") && !logInUser.getId().equals(user.get().getId())){
+        if (!logInUser.getRole().equals(Role.ADMIN) && !logInUser.getId().equals(user.get().getId())) {
             throw new UserNotMatch("You are trying to access other User");
         }
 
@@ -77,13 +76,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDto updateUser(Long id, UserCreateDto userDto) {
 
-        if (!userRepository.existsById(id)){
+        if (!userRepository.existsById(id)) {
             throw new UserDoesntExists("User Doesn't Exists");
         }
         User user = userRepository.getReferenceById(id);
         User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (!logInUser.getId().equals(user.getId())){
+        if (!logInUser.getId().equals(user.getId())) {
             throw new UserNotMatch("You are trying to access other User");
         }
 
@@ -98,8 +97,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void  updateRole(Long id) {
-       if (!userRepository.existsById(id)){
+    public void updateRole(Long id) {
+        if (!userRepository.existsById(id)) {
             throw new IdNotExist("User Doesn't Exists");
         }
 
