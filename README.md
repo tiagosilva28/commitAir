@@ -2,10 +2,9 @@
 
 # CommitAir SpringBoot Project
 
-**[MindSwap Bootcamp's](https://mindswap.academy/)** project - CommitAir created by *
-*[Filipa Gonçalves](https://github.com/filipagoncalves)**, **[Milton Caniceiro](https://github.com/milton-caniceiro)**
-and
-**[Tiago_Silva](https://github.com/tiagosilva28)**
+**[MindSwap Bootcamp's](https://mindswap.academy/)** project - CommitAir
+created by **[Filipa Gonçalves](https://github.com/filipagoncalves)**, *
+*[Milton Caniceiro](https://github.com/milton-caniceiro)** and **[Tiago_Silva](https://github.com/tiagosilva28)**
 
 ## Tutorial
 
