@@ -26,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    /*@PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody RegisterRequest user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -38,21 +38,19 @@ public class UserController {
         }
         UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-    }
-
-   /* @GetMapping("")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        List<UserDto> userDtos = this.userService.getAllUsers();
-        return new ResponseEntity<>(userDtos, HttpStatus.OK);
-    }
-
-    */
-
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         UserDto userDto = this.userService.getUserById(id);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        List<UserDto> userDtos = this.userService.getAllUsers();
+        return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -64,25 +62,15 @@ public class UserController {
                 System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
             }
         }
+
         UserDto updatedUser = userService.updateUser(id, userCreateDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
 
-    //não esquecer que só o admin pode fazer update do Role com security
     @PutMapping("/update-role/{id}")
-    //@Secured("USER")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> updateRole(@PathVariable Long id) {
         userService.updateRole(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-/*
-
-    /*@GetMapping
-    public ResponseEntity<List<CityDto>> city () throws JsonProcessingException {
-        AirLabsClient airLabsClient = new AirLabsClient();
-        List<CityDto> result = airLabsClient.getCities();
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }*/
-
-
 }

@@ -5,12 +5,15 @@ import academy.mindswap.commitAir.dto.UserCreateDto;
 import academy.mindswap.commitAir.dto.UserDto;
 import academy.mindswap.commitAir.exception.IdNotExist;
 import academy.mindswap.commitAir.exception.PasswordNotMatch;
+import academy.mindswap.commitAir.exception.UserDoesntExists;
+import academy.mindswap.commitAir.exception.UserNotMatch;
 import academy.mindswap.commitAir.mapper.UserMapper;
 import academy.mindswap.commitAir.model.Role;
 import academy.mindswap.commitAir.model.User;
 import academy.mindswap.commitAir.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,16 +54,33 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto getUserById(Long id) {
-        Optional<User> user = userRepository.getUserById(id);
-        if (user.isEmpty()) {
-            throw new IdNotExist("User not found");
+
+        if (!userRepository.existsById(id)){
+            throw new UserDoesntExists("User Doesn't Exists");
         }
-        return userMapper.fromUserEntityToUserDto(user.get());
+        User user = userRepository.getReferenceById(id);
+        User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (!logInUser.getId().equals(user.getId()) && !user.getRole().equals("ADMIN")){
+            throw new UserNotMatch("You are trying to access other User");
+        }
+
+        return userMapper.fromUserEntityToUserDto(user);
     }
 
     @Override
     public UserDto updateUser(Long id, UserCreateDto userDto) {
+
+        if (!userRepository.existsById(id)){
+            throw new UserDoesntExists("User Doesn't Exists");
+        }
         User user = userRepository.getReferenceById(id);
+        User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (!logInUser.getId().equals(user.getId())){
+            throw new UserNotMatch("You are trying to access other User");
+        }
+
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
