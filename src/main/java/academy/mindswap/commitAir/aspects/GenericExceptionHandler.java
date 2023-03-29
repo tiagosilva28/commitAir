@@ -59,5 +59,17 @@ public class GenericExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Insufficient Seats Available");
     }
 
+    @ExceptionHandler({BookingNotExists.class})
+    public ResponseEntity<String> handleBookingNotExists(Exception ex) {
+        logger.error("Resource not found: " + ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bookind Doesn't Exists");
+    }
+
+    @ExceptionHandler({UserNotMatch.class})
+    public ResponseEntity<String> handleUserNotMatch(Exception ex) {
+        logger.error("Resource not found: " + ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Don't have permissions to access here");
+    }
+
 
 }

@@ -7,6 +7,6 @@ import academy.mindswap.commitAir.dto.RequestBookingDto;
 public interface BookingService {
     BookingDto createBooking(RequestBookingDto requestBookingDto);
 
-    BookingDto getBookingById(Long userId);
+    BookingDto getBookingById(Long id);
 
 }
