@@ -58,14 +58,20 @@ public class UserServiceImpl implements UserService{
         if (!userRepository.existsById(id)){
             throw new UserDoesntExists("User Doesn't Exists");
         }
-        User user = userRepository.getReferenceById(id);
+        Optional<User> user = userRepository.getUserById(id);
         User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (!logInUser.getId().equals(user.getId()) && !user.getRole().equals("ADMIN")){
+        System.out.println(logInUser.getRole());
+
+        /*if (!logInUser.getId().equals(user.get().getId())){
+            throw new UserNotMatch("You are trying to access other User");
+        }*/
+
+        if (logInUser.getRole().equals("USER") && !logInUser.getId().equals(user.get().getId())){
             throw new UserNotMatch("You are trying to access other User");
         }
 
-        return userMapper.fromUserEntityToUserDto(user);
+        return userMapper.fromUserEntityToUserDto(user.get());
     }
 
     @Override

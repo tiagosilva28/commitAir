@@ -62,7 +62,7 @@ public class GenericExceptionHandler {
     @ExceptionHandler({BookingNotExists.class})
     public ResponseEntity<String> handleBookingNotExists(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bookind Doesn't Exists");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Booking Doesn't Exists");
     }
 
     @ExceptionHandler({UserNotMatch.class})
@@ -70,6 +70,4 @@ public class GenericExceptionHandler {
         logger.error("Resource not found: " + ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Don't have permissions to access here");
     }
-
-
 }
