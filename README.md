@@ -6,6 +6,9 @@
 created by **[Filipa Gonçalves](https://github.com/filipagoncalves)**,
 **[Milton Caniceiro](https://github.com/milton-caniceiro)** and **[Tiago Silva](https://github.com/tiagosilva28)**
 
+![Main](https://media0.giphy.com/media/PiuVH04cd9JcmqqWKK/giphy.gif)
+***
+
 ## Tutorial
 
 1. Go to the DockerCompose.yml file
