@@ -3,6 +3,8 @@ package academy.mindswap.commitAir.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
@@ -10,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AirportDto {
+public class AirportDto implements Serializable {
 
     public String name;
     public String iata_code;
