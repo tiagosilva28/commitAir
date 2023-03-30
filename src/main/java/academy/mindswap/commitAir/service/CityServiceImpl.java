@@ -1,7 +1,7 @@
 package academy.mindswap.commitAir.service;
 
 import academy.mindswap.commitAir.dto.CityDto;
-import academy.mindswap.commitAir.dto.RegisterRequest;
+import academy.mindswap.commitAir.exception.ApiError;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -17,18 +17,24 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 
-public class CityServiceImpl implements CityService{
+public class CityServiceImpl implements CityService {
+    public String errorMessage;
     RestTemplate restTemplate = new RestTemplate();
-
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public List<CityDto> getAllCities() throws JsonProcessingException {
-        String uri ="https://airlabs.co/api/v9/cities?api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
-        ResponseEntity<String> entity = restTemplate.exchange(uri, HttpMethod.GET,null, String.class);
+        String uri = "https://airlabs.co/api/v9/cities?api_key=51458100-5a17-4b86-a9f4-1388f74b5454";
+        ResponseEntity<String> entity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(entity.getBody());
         JsonNode response = root.path("response");
-        List<CityDto> cities = objectMapper.readValue(response.toString(), new TypeReference<List<CityDto>>() {});
+
+        if (!root.path("error").isMissingNode()) {
+            errorMessage = root.path("error").path("message").toString();
+            throw new ApiError("Error from API: " + errorMessage);
+        }
+        List<CityDto> cities = objectMapper.readValue(response.toString(), new TypeReference<List<CityDto>>() {
+        });
         return cities;
     }
 }

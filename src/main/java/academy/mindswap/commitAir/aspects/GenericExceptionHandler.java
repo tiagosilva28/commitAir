@@ -1,9 +1,11 @@
 package academy.mindswap.commitAir.aspects;
 
 import academy.mindswap.commitAir.exception.*;
+import academy.mindswap.commitAir.service.FlightServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GenericExceptionHandler {
 
     Logger logger = LoggerFactory.getLogger(GenericExceptionHandler.class);
+    @Autowired
+    FlightServiceImpl flightService;
 
     @ExceptionHandler({PasswordNotMatch.class})
     public ResponseEntity<String> handleNotFoundException(Exception ex) {
@@ -69,5 +73,13 @@ public class GenericExceptionHandler {
     public ResponseEntity<String> handleUserNotMatch(Exception ex) {
         logger.error("Resource not found: " + ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Don't have permissions to access here.");
+    }
+
+    @ExceptionHandler({ApiError.class})
+    public ResponseEntity<String> handleApiError(Exception ex) {
+        logger.error("Resource not found: " + ex);
+
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(flightService.errorMessage);
     }
 }
