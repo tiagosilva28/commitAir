@@ -54,14 +54,14 @@ public class UserController {
 
     @PutMapping("/update-role/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<UserDto> updateRole(@PathVariable Long id, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public ResponseEntity<UserDto> updateRole(@PathVariable Long id/*, BindingResult bindingResult*/) {
+        /*if (bindingResult.hasErrors()) {
 
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
                 System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
             }
-        }
+        }*/
         userService.updateRole(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

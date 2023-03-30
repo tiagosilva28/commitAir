@@ -1,7 +1,7 @@
 package academy.mindswap.commitAir.service;
 
 import academy.mindswap.commitAir.dto.FlightDto;
-import academy.mindswap.commitAir.exception.IdNotExist;
+import academy.mindswap.commitAir.exception.ApiError;
 import academy.mindswap.commitAir.mapper.FlightMapper;
 import academy.mindswap.commitAir.model.Flight;
 import academy.mindswap.commitAir.repository.FlightRepository;
@@ -22,8 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FlightServiceImpl implements FlightService {
 
+    public String errorMessage;
     RestTemplate restTemplate = new RestTemplate();
-
     ObjectMapper objectMapper = new ObjectMapper();
     private FlightRepository flightRepository;
 
@@ -41,6 +41,12 @@ public class FlightServiceImpl implements FlightService {
         ResponseEntity<String> entity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(entity.getBody());
         JsonNode response = root.path("response");
+
+        if (!root.path("error").isMissingNode()) {
+            errorMessage = root.path("error").path("message").toString();
+            throw new ApiError("Error from API: " + errorMessage);
+        }
+        
         List<FlightDto> flights = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {
         });
         return flights;
@@ -55,8 +61,9 @@ public class FlightServiceImpl implements FlightService {
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
 
-        if (root.path("error").path("message").equals("Flight not found")) {
-            throw new IdNotExist("Flight not found");
+        if (!root.path("error").isMissingNode()) {
+            errorMessage = root.path("error").path("message").toString();
+            throw new ApiError("Error from API: " + errorMessage);
         }
 
         FlightDto flightDto = objectMapper.readValue(response.toString(), new TypeReference<FlightDto>() {
@@ -80,6 +87,12 @@ public class FlightServiceImpl implements FlightService {
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
 
+        if (!root.path("error").isMissingNode()) {
+
+            errorMessage = root.path("error").path("message").toString();
+            throw new ApiError("Error from API: " + errorMessage);
+        }
+
         List<FlightDto> flightsDto = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {
         });
 
@@ -89,4 +102,5 @@ public class FlightServiceImpl implements FlightService {
 
         return flightsDto;
     }
+
 }

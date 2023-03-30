@@ -1,6 +1,7 @@
 package academy.mindswap.commitAir.service;
 
 import academy.mindswap.commitAir.dto.CountryDto;
+import academy.mindswap.commitAir.exception.ApiError;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CountryServiceImpl implements CountryService {
 
+    public String errorMessage;
     RestTemplate restTemplate = new RestTemplate();
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -27,6 +29,12 @@ public class CountryServiceImpl implements CountryService {
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
+
+        if (!root.path("error").isMissingNode()) {
+            errorMessage = root.path("error").path("message").toString();
+            throw new ApiError("Error from API: " + errorMessage);
+        }
+
         List<CountryDto> countries = objectMapper.readValue(response.toString(), new TypeReference<List<CountryDto>>() {
         });
 
