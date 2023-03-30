@@ -25,9 +25,9 @@ public class FlightServiceImpl implements FlightService {
     RestTemplate restTemplate = new RestTemplate();
 
     ObjectMapper objectMapper = new ObjectMapper();
-    FlightRepository flightRepository;
+    private FlightRepository flightRepository;
 
-    FlightMapper flightMapper;
+    private FlightMapper flightMapper;
 
     @Autowired
     public FlightServiceImpl(FlightRepository flightRepository, FlightMapper flightMapper) {
@@ -59,50 +59,25 @@ public class FlightServiceImpl implements FlightService {
             throw new IdNotExist("Flight not found");
         }
 
-        /*if (response.path("error").equals("Flight not found")) {
-            throw new IdNotExist("Flight not found");
-        }*/
-
         FlightDto flightDto = objectMapper.readValue(response.toString(), new TypeReference<FlightDto>() {
         });
 
         Flight flight = flightMapper.fromDtoToEntity(flightDto);
 
-
         flightRepository.save(flight);
-
-       /* ResponseEntity<Flight> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, Flight.class);
-        if(responseEntity.getStatusCode().isError()){
-            throw new Error();
-        }
-        */
 
         return flightDto;
     }
 
     @Override
-    public FlightDto getFlightByDate(String flightDate) {
-
-
-        return null;
-    }
-
-    @Override
     public List<FlightDto> getAllFlightInformation(String depIata, String arrIata, String depTime) throws JsonProcessingException {
-        String uri = "https://airlabs.co/api/v9/schedules?api_key=51458100-5a17-4b86-a9f4-1388f74b5454&dep_iata=" + depIata + "&arr_iata=" + arrIata + "&dep_time=" + depTime + "&status=scheduled";
+        String uri = "https://airlabs.co/api/v9/schedules?api_key=51458100-5a17-4b86-a9f4-1388f74b5454&dep_iata=" + depIata +
+                "&arr_iata=" + arrIata +
+                "&dep_time=" + depTime +
+                "&status=scheduled";
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
-
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
-
-
-       /* if (!root.findValue("error").isMissingNode()) {
-            System.out.println("PQP");
-            throw new RuntimeException("Failed to retrieve flights from API. Status code: " + responseEntity.getStatusCodeValue());
-        }
-
-        */
-
         JsonNode response = root.path("response");
 
         List<FlightDto> flightsDto = objectMapper.readValue(response.toString(), new TypeReference<List<FlightDto>>() {

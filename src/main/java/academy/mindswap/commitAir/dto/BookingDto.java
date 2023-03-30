@@ -1,13 +1,14 @@
 package academy.mindswap.commitAir.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookingDto {
@@ -16,6 +17,5 @@ public class BookingDto {
     private List<PassengerDto> passengers;
     private FlightDto flight;
     private double finalPrice;
-
 
 }

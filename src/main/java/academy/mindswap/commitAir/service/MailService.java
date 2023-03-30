@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.service;
 
-
 import academy.mindswap.commitAir.model.Flight;
 import academy.mindswap.commitAir.model.Passenger;
 import academy.mindswap.commitAir.model.User;

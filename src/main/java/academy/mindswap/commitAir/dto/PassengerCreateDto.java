@@ -1,13 +1,15 @@
 package academy.mindswap.commitAir.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PassengerCreateDto {
@@ -18,9 +20,9 @@ public class PassengerCreateDto {
     @NotBlank(message = "Must have last name")
     private String lastName;
 
-    @NotBlank (message = "Must have a Birth Date")
+    @NotBlank(message = "Must have a Birth Date")
     private Date dateOfBirth;
 
-    @NotBlank (message = "Must have a Nationality")
+    @NotBlank(message = "Must have a Nationality")
     private String nationality;
 }

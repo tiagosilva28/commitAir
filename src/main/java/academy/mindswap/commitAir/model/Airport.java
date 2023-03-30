@@ -1,17 +1,17 @@
 package academy.mindswap.commitAir.model;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="airports")
+@Table(name = "airports")
 public class Airport {
 
     @Id
@@ -26,12 +26,5 @@ public class Airport {
 
     @OneToOne(mappedBy = "airport")
     private Country country;
-
-
-    /*@OneToOne(mappedBy = "from")
-    private Flight flight_from;
-
-    @OneToOne(mappedBy = "to")
-    private Flight flight_to;*/
-
+    
 }

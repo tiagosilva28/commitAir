@@ -19,14 +19,14 @@ public class GenericExceptionHandler {
     @ExceptionHandler({PasswordNotMatch.class})
     public ResponseEntity<String> handleNotFoundException(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Password doesn't match");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Password doesn't match.");
     }
 
 
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<String> handleNotFoundException(EntityNotFoundException ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Entity not found");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Entity not found.");
     }
 
     @ExceptionHandler(value = {Exception.class})
@@ -38,36 +38,36 @@ public class GenericExceptionHandler {
     @ExceptionHandler({UserDoesntExists.class})
     public ResponseEntity<String> handleUserDoesntExists(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Doesn't exists");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
     }
 
     @ExceptionHandler({PassengerDoesntExists.class})
     public ResponseEntity<String> handlePassengerDoesntExists(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Passenger Doesn't exists");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Passenger not found.");
     }
 
     @ExceptionHandler({FlightDoesntExists.class})
     public ResponseEntity<String> handleFlightDoesntExists(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Flight Doesn't exists");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Flight not found.");
     }
 
     @ExceptionHandler({InsufficientSeats.class})
     public ResponseEntity<String> handleinsufficientSeats(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Insufficient Seats Available");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Insufficient seats available.");
     }
 
     @ExceptionHandler({BookingNotExists.class})
     public ResponseEntity<String> handleBookingNotExists(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Booking Doesn't Exists");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Booking not found.");
     }
 
     @ExceptionHandler({UserNotMatch.class})
     public ResponseEntity<String> handleUserNotMatch(Exception ex) {
         logger.error("Resource not found: " + ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Don't have permissions to access here");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Don't have permissions to access here.");
     }
 }

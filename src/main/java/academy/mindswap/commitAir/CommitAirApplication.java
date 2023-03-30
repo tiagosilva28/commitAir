@@ -8,9 +8,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 public class CommitAirApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CommitAirApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(CommitAirApplication.class, args);
+    }
 
 }

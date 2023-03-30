@@ -13,12 +13,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class AirportServiceImpl implements AirportService {
-
-
+    
     RestTemplate restTemplate = new RestTemplate();
 
     ObjectMapper objectMapper = new ObjectMapper();

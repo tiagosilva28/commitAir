@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,8 +25,7 @@ public class Booking {
 
     @ManyToOne(targetEntity = User.class)
     private User user;
-
-
+    
     @ManyToMany(targetEntity = Passenger.class)
     private List<Passenger> passengers;
 

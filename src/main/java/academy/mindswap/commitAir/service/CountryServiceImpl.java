@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CountryServiceImpl implements CountryService{
+public class CountryServiceImpl implements CountryService {
 
     RestTemplate restTemplate = new RestTemplate();
     ObjectMapper objectMapper = new ObjectMapper();
@@ -27,15 +27,9 @@ public class CountryServiceImpl implements CountryService{
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
         JsonNode root = objectMapper.readTree(responseEntity.getBody());
         JsonNode response = root.path("response");
-        List<CountryDto> countries =  objectMapper.readValue(response.toString(), new TypeReference<List<CountryDto>>() {});
+        List<CountryDto> countries = objectMapper.readValue(response.toString(), new TypeReference<List<CountryDto>>() {
+        });
 
-
-     /*   ResponseEntity<AirLabsResponseCitiesDto> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, null, AirLabsResponseCitiesDto.class);
-        if(responseEntity.getStatusCode().isError()){
-            throw new Error();
-        }
-
-      */
         return countries;
     }
 

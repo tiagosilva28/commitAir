@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
 
 @Builder
 @Data
@@ -53,7 +51,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

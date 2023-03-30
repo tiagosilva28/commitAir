@@ -6,14 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="countries")
+@Table(name = "countries")
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +19,6 @@ public class Country {
 
     @Column(nullable = false)
     private String name;
-
 
     @OneToOne(targetEntity = Airport.class)
     private Airport airport;

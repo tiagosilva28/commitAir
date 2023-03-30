@@ -1,5 +1,6 @@
 package academy.mindswap.commitAir.config;
 
+import academy.mindswap.commitAir.model.Token;
 import academy.mindswap.commitAir.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class LogoutService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
+
     @Override
     public void logout(
             HttpServletRequest request,
@@ -22,11 +24,11 @@ public class LogoutService implements LogoutHandler {
     ) {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         jwt = authHeader.substring(7);
-        var storedToken = tokenRepository.findByToken(jwt)
+        Token storedToken = tokenRepository.findByToken(jwt)
                 .orElse(null);
         if (storedToken != null) {
             storedToken.setExpired(true);

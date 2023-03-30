@@ -6,14 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="cities")
+@Table(name = "cities")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +30,5 @@ public class City {
 
     @Column(nullable = false)
     private String country_code;
-
-
 
 }

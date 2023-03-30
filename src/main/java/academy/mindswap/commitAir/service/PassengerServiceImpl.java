@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.service;
 
-import academy.mindswap.commitAir.dto.PassengerCreateDto;
 import academy.mindswap.commitAir.dto.PassengerDto;
 import academy.mindswap.commitAir.mapper.PassengerMapper;
 import academy.mindswap.commitAir.model.Passenger;
@@ -11,16 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
-public class PassengerServiceImpl implements PassengerService{
+public class PassengerServiceImpl implements PassengerService {
     PassengerRepository passengerRepository;
     PassengerMapper passengerMapper;
 
-
     @Autowired
-    public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerMapper passengerMapper){
+    public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerMapper passengerMapper) {
         this.passengerRepository = passengerRepository;
         this.passengerMapper = passengerMapper;
     }
@@ -34,7 +31,7 @@ public class PassengerServiceImpl implements PassengerService{
 
     @Override
     public PassengerDto getPassengerById(Long passengerId) {
-        Passenger passenger =passengerRepository.getReferenceById(passengerId);
+        Passenger passenger = passengerRepository.getReferenceById(passengerId);
         return passengerMapper.fromPassengerEntityToPassengerDto(passenger);
     }
 
@@ -50,7 +47,7 @@ public class PassengerServiceImpl implements PassengerService{
     @Override
     public PassengerDto updatePassenger(Long passengerId, PassengerDto passengerDto) {
         Passenger existingPassenger = passengerRepository.getReferenceById(passengerId);
-        if(existingPassenger == null){
+        if (existingPassenger == null) {
             throw new IllegalArgumentException("User not found");
         }
         existingPassenger.setFirstName(passengerDto.getFirstName());
@@ -63,8 +60,8 @@ public class PassengerServiceImpl implements PassengerService{
 
     @Override
     public void deletePassenger(Long passengerId) {
-        Passenger passenger =passengerRepository.getReferenceById(passengerId);
-        if(passenger == null){
+        Passenger passenger = passengerRepository.getReferenceById(passengerId);
+        if (passenger == null) {
             throw new IllegalArgumentException("Passenger not found");
         }
         passengerRepository.delete(passenger);

@@ -1,17 +1,17 @@
 package academy.mindswap.commitAir.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestBookingDto {
-
     private List<Long> passengerIds;
     private Long flightId;
 }

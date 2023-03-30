@@ -55,16 +55,10 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById(Long id) {
 
         if (!userRepository.existsById(id)) {
-            throw new UserDoesntExists("User Doesn't Exists");
+            throw new UserDoesntExists("User not found.");
         }
         Optional<User> user = userRepository.getUserById(id);
         User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        System.out.println(logInUser.getRole());
-
-        /*if (!logInUser.getId().equals(user.get().getId())){
-            throw new UserNotMatch("You are trying to access other User");
-        }*/
 
         if (!logInUser.getRole().equals(Role.ADMIN) && !logInUser.getId().equals(user.get().getId())) {
             throw new UserNotMatch("You are trying to access other User");
@@ -77,13 +71,13 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(Long id, UserCreateDto userDto) {
 
         if (!userRepository.existsById(id)) {
-            throw new UserDoesntExists("User doesn't exists!");
+            throw new UserDoesntExists("User not found.");
         }
         User user = userRepository.getReferenceById(id);
         User logInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (!logInUser.getId().equals(user.getId())) {
-            throw new UserNotMatch("You are trying to access other User");
+            throw new UserNotMatch("You are trying to access other User.");
         }
 
         user.setFirstName(userDto.getFirstName());
@@ -99,7 +93,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateRole(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new IdNotExist("User Doesn't Exists");
+            throw new IdNotExist("User not found.");
         }
 
         User user = userRepository.getReferenceById(id);

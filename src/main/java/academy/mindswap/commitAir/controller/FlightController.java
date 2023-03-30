@@ -31,16 +31,7 @@ public class FlightController {
 
     @GetMapping("/{flightIata}")
     public ResponseEntity<FlightDto> getFlightById(@PathVariable String flightIata) throws JsonProcessingException {
-       /* if (bindingResult.hasErrors()) {
 
-
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
-            }
-        }
-
-        */
         FlightDto flight = flightService.getFlightById(flightIata);
         return new ResponseEntity<>(flight, HttpStatus.OK);
     }
@@ -48,9 +39,8 @@ public class FlightController {
     @GetMapping("/{depIata}/{arrIata}/{depTime}")
     @ResponseStatus(HttpStatus.OK)
     @Cacheable(value = "getAllFlightInformation", key = "#depIata.concat('-').concat(#arrIata).concat('-').concat(#depTime)")
-    public List<FlightDto> getAllFlightInformation(@PathVariable String depIata, String arrIata, String depTime) throws JsonProcessingException {
+    public List<FlightDto> getAllFlightInformation(@PathVariable String depIata, @PathVariable String arrIata, @PathVariable String depTime) throws JsonProcessingException {
         List<FlightDto> flights = flightService.getAllFlightInformation(depIata, arrIata, depTime);
         return flights;
-        //return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 }

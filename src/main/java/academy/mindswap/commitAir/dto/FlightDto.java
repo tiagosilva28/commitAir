@@ -1,6 +1,5 @@
 package academy.mindswap.commitAir.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,10 +15,7 @@ import java.util.Random;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FlightDto implements Serializable {
-    /*private String airline_iata;
-    private String airline_icao;*/
     private String flight_iata;
-    /*private String flight_icao;*/
     private String dep_iata;
     private String dep_time;
     private String arr_iata;
@@ -44,6 +40,5 @@ public class FlightDto implements Serializable {
 
         return randomPrice;
     }
-
 
 }

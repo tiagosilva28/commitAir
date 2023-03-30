@@ -1,11 +1,13 @@
 package academy.mindswap.commitAir.dto;
 
-
 import academy.mindswap.commitAir.model.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -25,10 +27,10 @@ public class UserDto {
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Invalid email")
     private String email;
 
-    @NotBlank (message = "Must have a Birth Date")
+    @NotBlank(message = "Must have a Birth Date")
     private Date dateOfBirth;
 
-    @NotBlank (message = "Must have a Nationality")
+    @NotBlank(message = "Must have a Nationality")
     private String nationality;
 
     private Role role;
