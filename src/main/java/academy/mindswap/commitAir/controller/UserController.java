@@ -52,7 +52,7 @@ public class UserController {
         return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/update-role/{id}")
+    @PatchMapping("/update-role/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> updateRole(@PathVariable Long id/*, BindingResult bindingResult*/) {
         /*if (bindingResult.hasErrors()) {

@@ -2,6 +2,7 @@ package academy.mindswap.commitAir.auth;
 
 import academy.mindswap.commitAir.config.JwtService;
 import academy.mindswap.commitAir.dto.UserCreateDto;
+import academy.mindswap.commitAir.exception.PasswordNotMatch;
 import academy.mindswap.commitAir.model.Role;
 import academy.mindswap.commitAir.model.Token;
 import academy.mindswap.commitAir.model.TokenType;
@@ -27,6 +28,11 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(UserCreateDto request) {
+
+        if (!request.getPassword().equals(request.getRetypePassword())) {
+            throw new PasswordNotMatch("Passwords do not match");
+        }
+
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
