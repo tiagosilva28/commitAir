@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CountryDto {
+public class CountryDto implements Serializable {
     private String code;
     private String code3;
     private String name;

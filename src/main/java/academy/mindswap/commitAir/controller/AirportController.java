@@ -27,7 +27,7 @@ public class AirportController {
     @ResponseStatus(HttpStatus.OK)
     @Cacheable(value = "getAllAirports")
     public List<AirportDto> getAllAirports() throws JsonProcessingException {
-        List<AirportDto> airportDtos = airportService.getAllAirports();
-        return airportDtos;
+        List<AirportDto> airports = airportService.getAllAirports();
+        return airports;
     }
 }

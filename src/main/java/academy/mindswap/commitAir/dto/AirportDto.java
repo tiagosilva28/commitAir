@@ -15,6 +15,6 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AirportDto implements Serializable {
 
-    public String name;
-    public String iata_code;
+    private String name;
+    private String iata_code;
 }
